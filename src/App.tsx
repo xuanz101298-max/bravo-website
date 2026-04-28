@@ -164,7 +164,7 @@ export default function App() {
             </div>
             <div className="flex flex-col items-center gap-6">
               <div className="h-px w-24 bg-zinc-300" />
-              <h2 className="text-xl md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
+              <h2 className="text-xs md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
                 上海整挺好文化传媒有限公司
               </h2>
               <div className="h-px w-24 bg-zinc-300" />
