@@ -19,7 +19,7 @@ const PROJECTS = [
   { 
     name: "莲花楼", 
     type: "舞台剧", 
-    description: "十年前,惊才绝艳的四顾门门主李相夷为追查师兄单孤刀遗骨,与金鸳盟盟主笛飞声决战东海,而后两大高手就此消失在万顷碧波之上。十年后,江湖游医李莲花偶遇仗义行侠安天下的方多病,机缘巧合下“被迫”重新卷入江湖,一幕交织着侠骨柔情、快意恩仇的武侠长卷就此在舞台上缓缓展开……本剧改编自藤萍原著小说《吉祥纹莲花楼》,舞台剧版《莲花楼》不仅展现了李莲花对江湖的“漫长告别”, 也讲述了李相夷是如何成为“天下第一”的故事。",
+    description: "十年前,惊才绝艳的四顾门门主李相夷为追查师兄单孤刀遗骨,与金鸳盟盟主笛飞声决战东海,而后两大高手就此消失在万顷碧波之上。十年后,江湖游医李莲花偶遇仗义行侠安天下的方多病,机缘巧合下"被迫"重新卷入江湖,一幕交织着侠骨柔情、快意恩仇的武侠长卷就此在舞台上缓缓展开……本剧改编自藤萍原著小说《吉祥纹莲花楼》,舞台剧版《莲花楼》不仅展现了李莲花对江湖的"漫长告别", 也讲述了李相夷是如何成为"天下第一"的故事。",
     mainImage: "/image6.png",
     stills: [
       "/image7.png",
@@ -117,15 +117,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen selection:bg-zinc-900 selection:text-white">
-      {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="font-display font-bold text-2xl tracking-tighter">BRAVO</span>
             <span className="text-xs font-medium bg-zinc-900 text-white px-2 py-0.5 rounded">整挺好</span>
           </div>
-
-          {/* Desktop Nav */}
           <div className="hidden md:flex gap-8">
             {navLinks.map((link) => (
               <a key={link.name} href={link.href} className="text-sm font-medium hover:text-zinc-500 transition-colors">
@@ -133,14 +130,10 @@ export default function App() {
               </a>
             ))}
           </div>
-
-          {/* Mobile Menu Toggle */}
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
-
-        {/* Mobile Nav */}
         {isMenuOpen && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
@@ -148,12 +141,7 @@ export default function App() {
             className="absolute top-full left-0 w-full bg-white border-b border-zinc-100 p-6 flex flex-col gap-4 md:hidden"
           >
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                onClick={() => setIsMenuOpen(false)}
-                className="text-lg font-medium"
-              >
+              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-lg font-medium">
                 {link.name}
               </a>
             ))}
@@ -161,18 +149,12 @@ export default function App() {
         )}
       </nav>
 
-      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-zinc-100">
         <div className="absolute inset-0 opacity-10 pointer-events-none select-none flex items-center justify-center">
           <h1 className="text-[30vw] font-display font-black leading-none tracking-tighter">BRAVO</h1>
         </div>
-        
         <div className="relative z-10 text-center px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="mb-12">
               <p className="text-3xl md:text-7xl font-display font-bold tracking-[0.15em] text-zinc-900 leading-tight">
                 <span className="inline-block bg-zinc-900 text-white px-4 py-1 rounded-sm mr-4 shadow-xl">整</span>
@@ -180,7 +162,6 @@ export default function App() {
                 <span className="inline-block bg-zinc-900 text-white px-5 py-1 rounded-sm ml-2 shadow-xl">挺好</span>
               </p>
             </div>
-            
             <div className="flex flex-col items-center gap-6">
               <div className="h-px w-24 bg-zinc-300" />
               <h2 className="text-xl md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
@@ -189,13 +170,7 @@ export default function App() {
               <div className="h-px w-24 bg-zinc-300" />
             </div>
           </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="mt-12"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="mt-12">
             <a href="#about" className="inline-flex items-center gap-2 group">
               <span className="text-sm font-bold tracking-widest uppercase">探索更多</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -204,41 +179,28 @@ export default function App() {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="mb-12">
               <h3 className="text-sm font-bold tracking-widest uppercase text-zinc-400 mb-2">About Us</h3>
               <h2 className="text-4xl font-display font-bold">关于我们</h2>
             </div>
             <div className="space-y-8 text-lg md:text-xl text-zinc-600 leading-relaxed font-light">
-              <p>
-                <span className="font-bold text-zinc-900">整挺好 BRAVO</span> 是由青年制作人曹一凡于2021年创立的戏剧厂牌。
-              </p>
-              <p>
-                业务覆盖剧目出品制作、影视拍摄、演艺新空间开发、剧场票务运营管理、剧团运营、艺人经纪、戏剧IP孵化、运输服务、品牌营销等多个细分领域。
-              </p>
-              <p>
-                我们联动众多一线创制团体及独立艺术家，致力于打造精品演出现场、拓展新形态演艺空间。不断取得良好的口碑和票房成绩。
-              </p>
+              <p><span className="font-bold text-zinc-900">整挺好 BRAVO</span> 是由青年制作人曹一凡于2021年创立的戏剧厂牌。</p>
+              <p>业务覆盖剧目出品制作、影视拍摄、演艺新空间开发、剧场票务运营管理、剧团运营、艺人经纪、戏剧IP孵化、运输服务、品牌营销等多个细分领域。</p>
+              <p>我们联动众多一线创制团体及独立艺术家，致力于打造精品演出现场、拓展新形态演艺空间。不断取得良好的口碑和票房成绩。</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Section */}
       <section id="services" className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h3 className="text-sm font-bold tracking-widest uppercase text-zinc-400 mb-2">Our Services</h3>
             <h2 className="text-4xl font-display font-bold">业务范围</h2>
           </div>
-          
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {SERVICES.map((service, idx) => (
               <motion.div
@@ -259,14 +221,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* Team Section */}
       <section id="team" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <h3 className="text-sm font-bold tracking-widest uppercase text-zinc-400 mb-2">Our Team</h3>
             <h2 className="text-4xl font-display font-bold">团队介绍</h2>
           </div>
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
             {TEAM.map((member, idx) => (
               <motion.div
@@ -278,12 +238,7 @@ export default function App() {
                 className="group text-center"
               >
                 <div className="aspect-square rounded-full overflow-hidden mb-6 bg-zinc-100 shadow-sm group-hover:shadow-xl transition-all duration-500 max-w-[200px] mx-auto">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 </div>
                 <h4 className="text-xl font-bold mb-1">{member.name}</h4>
                 <p className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">{member.role}</p>
@@ -294,166 +249,106 @@ export default function App() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="bg-zinc-900 text-white overflow-hidden">
         {PROJECTS.map((project, idx) => (
           <div key={project.name} className="min-h-screen py-24 flex items-center border-b border-zinc-800 last:border-0 relative">
             <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="z-10"
-              >
+              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="z-10">
                 <div className="mb-8">
                   <h3 className="text-xs font-bold tracking-widest uppercase text-zinc-500 mb-2">{project.type}</h3>
                   <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 tracking-tighter">{project.name}</h2>
                   <div className="h-1 w-16 bg-white" />
                 </div>
-                <p className="text-base md:text-lg text-zinc-400 leading-relaxed mb-12 font-light">
-                  {project.description}
-                </p>
-                
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed mb-12 font-light">{project.description}</p>
                 <div className="space-y-4">
                   <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-600">Stage Stills / 剧照精选</h4>
                   <div className="grid grid-cols-3 gap-6">
                     {project.stills.map((still, sIdx) => (
-                      <motion.div 
-                        key={sIdx}
-                        whileHover={{ scale: 1.05 }}
-                        className="aspect-[4/3] rounded-lg overflow-hidden bg-zinc-800 border border-white/5"
-                      >
-                        <img 
-                          src={still} 
-                          alt={`${project.name} still ${sIdx + 1}`} 
-                          className="w-full h-full object-cover transition-all duration-500" 
-                          referrerPolicy="no-referrer" 
-                        />
+                      <motion.div key={sIdx} whileHover={{ scale: 1.05 }} className="aspect-[4/3] rounded-lg overflow-hidden bg-zinc-800 border border-white/5">
+                        <img src={still} alt={`${project.name} still ${sIdx + 1}`} className="w-full h-full object-cover transition-all duration-500" referrerPolicy="no-referrer" />
                       </motion.div>
                     ))}
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl relative order-first md:order-last max-w-sm mx-auto md:ml-auto md:mr-0"
-              >
-                <img 
-                  src={project.mainImage} 
-                  alt={project.name} 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl relative order-first md:order-last max-w-sm mx-auto md:ml-auto md:mr-0">
+                <img src={project.mainImage} alt={project.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60" />
               </motion.div>
             </div>
-            
-            {/* Background Accent */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 text-[40vw] font-display font-bold text-white/5 pointer-events-none select-none">
-              {idx + 1}
-            </div>
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 text-[40vw] font-display font-bold text-white/5 pointer-events-none select-none">{idx + 1}</div>
           </div>
         ))}
       </section>
 
-      {/* Future Section */}
       <section id="future" className="relative min-h-[80vh] flex flex-col items-center justify-center bg-[#e5e5e5] overflow-hidden py-24">
-        {/* Giant BRAVO Background from PDF Page 14 */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-          <h1 className="text-[35vw] font-display font-black leading-none tracking-tighter text-[#cccccc]">
-            BRAVO
-          </h1>
+          <h1 className="text-[35vw] font-display font-black leading-none tracking-tighter text-[#cccccc]">BRAVO</h1>
         </div>
-
         <div className="relative z-10 text-center px-6 mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-6xl font-display font-bold text-white mb-2 drop-shadow-sm">
-              未来发展
-            </h2>
-            <p className="text-xl md:text-2xl font-light text-white tracking-[0.2em] font-display">
-              Future development
-            </p>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2 className="text-3xl md:text-6xl font-display font-bold text-white mb-2 drop-shadow-sm">未来发展</h2>
+            <p className="text-xl md:text-2xl font-light text-white tracking-[0.2em] font-display">Future development</p>
           </motion.div>
         </div>
-
         <div className="relative z-10 max-w-6xl mx-auto px-6 mt-12 text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="space-y-4 text-zinc-800 font-bold tracking-tight text-lg md:text-xl leading-relaxed"
-          >
-            <p>
-              2026年BRAVO整挺好将推出数部全新的小剧场驻演剧目和中大剧场巡演剧目，小剧场院线业务也将拓展到全国更多城市
-            </p>
-            <p>
-              并计划在现有艺人经纪业务的基础上建立全新的剧团管理模式和演员培训体系，完善演员梯队建设不断提升演出质量！
-            </p>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="space-y-4 text-zinc-800 font-bold tracking-tight text-lg md:text-xl leading-relaxed">
+            <p>2026年BRAVO整挺好将推出数部全新的小剧场驻演剧目和中大剧场巡演剧目，小剧场院线业务也将拓展到全国更多城市</p>
+            <p>并计划在现有艺人经纪业务的基础上建立全新的剧团管理模式和演员培训体系，完善演员梯队建设不断提升演出质量！</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-24 bg-zinc-50">
+      {/* Contact Section - Mobile Optimized */}
+      <section id="contact" className="py-16 md:py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-zinc-900 rounded-[3rem] p-12 md:p-24 text-white overflow-hidden relative">
+          <div className="bg-zinc-900 rounded-3xl md:rounded-[3rem] p-8 md:p-16 lg:p-24 text-white overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-            
-            <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">联系我们</h2>
-                <p className="text-zinc-400 text-lg mb-12">
-                  如果您有任何合作意向或疑问，欢迎通过以下方式联系我们。
-                </p>
-                
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-900 transition-colors">
-                      <Phone className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">电话</p>
-                      <p className="text-2xl font-display font-bold">18920709293</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-900 transition-colors">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">邮箱</p>
-                      <p className="text-2xl font-display font-bold">bravo@zhengtinghao.cn</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="relative z-10">
+              <div className="mb-8 md:mb-12">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4">联系我们</h2>
+                <p className="text-zinc-400 text-base md:text-lg">如果您有任何合作意向或疑问，欢迎通过以下方式联系我们。</p>
               </div>
-              
-              <div className="relative group flex flex-col items-center md:items-end">
-                <div className="bg-white p-4 rounded-3xl shadow-2xl relative">
-                  <div className="w-32 h-32 md:w-44 md:h-44 relative">
-                    <img 
-                      src="/qrcode.png" 
-                      alt="QR Code" 
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=BRAVO-DRAMA";
-                      }}
-                      referrerPolicy="no-referrer"
-                    />
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-10">
+                <div className="space-y-6 md:space-y-8">
+                  <div className="flex items-center gap-4 md:gap-6 group">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-900 transition-colors flex-shrink-0">
+                      <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs md:text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">电话</p>
+                      <p className="text-lg md:text-2xl font-display font-bold break-all">18920709293</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 md:gap-6 group">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-zinc-900 transition-colors flex-shrink-0">
+                      <Mail className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs md:text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">邮箱</p>
+                      <p className="text-lg md:text-2xl font-display font-bold break-all">bravo@zhengtinghao.cn</p>
+                    </div>
                   </div>
                 </div>
-                <div className="mt-6 flex items-center gap-2 text-zinc-400">
-                  <Users className="w-4 h-4" />
-                  <p className="text-sm font-bold tracking-widest uppercase">扫码添加微信</p>
+                <div className="relative group flex flex-col items-center">
+                  <div className="bg-white p-3 md:p-4 rounded-2xl md:rounded-3xl shadow-2xl">
+                    <div className="w-28 h-28 md:w-36 md:h-36 relative">
+                      <img 
+                        src="/qrcode.png" 
+                        alt="QR Code" 
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=BRAVO-DRAMA";
+                        }}
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 text-zinc-400">
+                    <Users className="w-4 h-4" />
+                    <p className="text-xs md:text-sm font-bold tracking-widest uppercase">扫码添加微信</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -461,23 +356,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-12 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <span className="font-display font-bold text-xl tracking-tighter">BRAVO</span>
             <span className="text-[10px] font-medium bg-zinc-900 text-white px-1.5 py-0.5 rounded">整挺好</span>
           </div>
-          
-          <p className="text-sm text-zinc-400">
-            © 2026 上海整挺好文化传媒有限公司. All rights reserved.
-          </p>
-          
+          <p className="text-sm text-zinc-400">© 2026 上海整挺好文化传媒有限公司. All rights reserved.</p>
           <div className="flex gap-6">
             {navLinks.slice(0, 3).map(link => (
-              <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">
-                {link.name}
-              </a>
+              <a key={link.name} href={link.href} className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors">{link.name}</a>
             ))}
           </div>
         </div>
