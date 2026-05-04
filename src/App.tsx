@@ -84,6 +84,24 @@ const TEAM = [
     role: "戏剧导演",
     bio: "《寻找家人》中方导演，《Time Share House》导演，《忘川引》执行导演，《隐婚男女》复排导演，《不能说的秘密》执行导演。",
     image: "/image5.png"
+  },
+  {
+    name: "待补充",
+    role: "待补充",
+    bio: "个人简介待补充。",
+    image: "/image1.png"
+  },
+  {
+    name: "待补充",
+    role: "待补充",
+    bio: "个人简介待补充。",
+    image: "/image1.png"
+  },
+  {
+    name: "待补充",
+    role: "待补充",
+    bio: "个人简介待补充。",
+    image: "/image1.png"
   }
 ];
 
@@ -164,7 +182,7 @@ export default function App() {
             </div>
             <div className="flex flex-col items-center gap-6">
               <div className="h-px w-24 bg-zinc-300" />
-              <h2 className="text-[10px] md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
+              <h2 className="text-[11px] md:text-3xl font-display font-bold tracking-[0.2em] text-zinc-500 uppercase">
                 上海整挺好文化传媒有限公司
               </h2>
               <div className="h-px w-24 bg-zinc-300" />
