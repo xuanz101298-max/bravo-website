@@ -164,7 +164,7 @@ export default function App() {
             </div>
             <div className="flex flex-col items-center gap-6">
               <div className="h-px w-24 bg-zinc-300" />
-              <h2 className="text-xs md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
+              <h2 className="text-[10px] md:text-3xl font-display font-bold tracking-[0.4em] text-zinc-500 uppercase">
                 上海整挺好文化传媒有限公司
               </h2>
               <div className="h-px w-24 bg-zinc-300" />
@@ -187,7 +187,7 @@ export default function App() {
               <h2 className="text-4xl font-display font-bold">关于我们</h2>
             </div>
             <div className="space-y-8 text-lg md:text-xl text-zinc-600 leading-relaxed font-light">
-              <p><span className="font-bold text-zinc-900">整挺好 BRAVO</span> 是由青年制作人曹一凡于2021年创立的戏剧厂牌。</p>
+              <p><span className="font-bold text-zinc-900">整挺好 BRAVO</span> 是由制作人曹一凡于2021年创立的戏剧厂牌。</p>
               <p>业务覆盖剧目出品制作、影视拍摄、演艺新空间开发、剧场票务运营管理、剧团运营、艺人经纪、戏剧IP孵化、运输服务、品牌营销等多个细分领域。</p>
               <p>我们联动众多一线创制团体及独立艺术家，致力于打造精品演出现场、拓展新形态演艺空间。不断取得良好的口碑和票房成绩。</p>
             </div>
@@ -305,9 +305,9 @@ export default function App() {
           <div className="bg-zinc-900 rounded-3xl md:rounded-[3rem] p-8 md:p-16 lg:p-24 text-white overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="relative z-10">
-              <div className="mb-8 md:mb-12">
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-4">联系我们</h2>
-                <p className="text-zinc-400 text-base md:text-lg">如果您有任何合作意向或疑问，欢迎通过以下方式联系我们。</p>
+              <div className="mb-6 md:mb-12">
+                <h2 className="text-2xl md:text-5xl lg:text-6xl font-display font-bold mb-2">联系我们</h2>
+                <p className="text-zinc-400 text-sm md:text-lg">如果您有任何合作意向或疑问，欢迎通过以下方式联系我们。</p>
               </div>
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-10">
                 <div className="space-y-6 md:space-y-8">
@@ -317,7 +317,7 @@ export default function App() {
                     </div>
                     <div>
                       <p className="text-xs md:text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">电话</p>
-                      <p className="text-lg md:text-2xl font-display font-bold break-all">18920709293</p>
+                      <p className="text-base md:text-2xl font-display font-bold break-all">18920709293</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 md:gap-6 group">
@@ -326,7 +326,7 @@ export default function App() {
                     </div>
                     <div>
                       <p className="text-xs md:text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">邮箱</p>
-                      <p className="text-lg md:text-2xl font-display font-bold break-all">bravo@zhengtinghao.cn</p>
+                      <p className="text-base md:text-2xl font-display font-bold break-all">bravo@zhengtinghao.cn</p>
                     </div>
                   </div>
                 </div>
