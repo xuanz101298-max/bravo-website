@@ -89,7 +89,7 @@ const TEAM = [
     name: "黄润景",
     role: "制作人/经纪人",
     bio: "主要作品：舞剧《天工开物》舞台剧《莲花楼》话剧《钦差大臣》《会走路的全家福》音乐剧《丝路之声》《七月与安生》《Time share house》《织梦》",
-    image: "/image1.png"
+    image: "/润景.png"
   },
   {
     name: "杨沐琳",
