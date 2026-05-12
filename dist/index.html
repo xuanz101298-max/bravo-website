@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>篝火心動夜 | 文旅恋综提案</title>
+    <meta name="description" content="文旅恋综 · 把"观察室"搬进风景里" />
+    <script>
+      // Polyfills for older browsers
+      (function(){
+        var needsPolyfill = false;
+        try {
+          if (typeof crypto === "undefined" || typeof crypto.randomUUID !== "function") needsPolyfill = true;
+          if (typeof Object.hasOwn !== "function") needsPolyfill = true;
+          if (typeof [].at !== "function") needsPolyfill = true;
+          if (typeof [].findLast !== "function") needsPolyfill = true;
+        } catch(e) { needsPolyfill = true; }
+        if (needsPolyfill && !window.__polyfilled) {
+          window.__polyfilled = true;
+          document.write('<script src="/polyfills.js"><\/script>');
+        }
+      })();
+    </script>
+    <script>
+      // Stub Miaoda runtime globals (not used by app but prevents undefined errors)
+      window.csrfToken = '';
+      window.userId = '';
+      window.tenantId = '';
+      window.appId = '';
+      window.ENVIRONMENT = 'production';
+      window._appInfo = { name: '篝火心動夜', description: '文旅恋综提案' };
+    </script>
+    <link rel="stylesheet" href="/assets/index-Cj-Jq9D4.css" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/assets/index-BGkGki-r.js"></script>
+  </body>
+</html>
