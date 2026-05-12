@@ -5,34 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>篝火心動夜 | 文旅恋综提案</title>
     <meta name="description" content="文旅恋综 · 把"观察室"搬进风景里" />
+
+    <!-- Polyfills for older browsers -->
     <script>
-      (function(){
-        var needsPolyfill = false;
-        try {
-          if (typeof crypto === "undefined" || typeof crypto.randomUUID !== "function") needsPolyfill = true;
-          if (typeof Object.hasOwn !== "function") needsPolyfill = true;
-          if (typeof [].at !== "function") needsPolyfill = true;
-          if (typeof [].findLast !== "function") needsPolyfill = true;
-        } catch(e) { needsPolyfill = true; }
-        if (needsPolyfill && !window.__polyfilled) {
-          window.__polyfilled = true;
-          document.write('<script src="/polyfills.js"><\/script>');
-        }
-      })();
+    (function(){
+      var needsPolyfill = false;
+      try {
+        if (typeof crypto === "undefined" || typeof crypto.randomUUID !== "function") needsPolyfill = true;
+        if (typeof Object.hasOwn !== "function") needsPolyfill = true;
+        if (typeof [].at !== "function") needsPolyfill = true;
+        if (typeof [].findLast !== "function") needsPolyfill = true;
+      } catch(e) { needsPolyfill = true; }
+      if (needsPolyfill && !window.__polyfilled) {
+        window.__polyfilled = true;
+        document.write('<script src="/polyfills.js"><\/script>');
+      }
+    })();
     </script>
+
+    <!-- App globals (static values for standalone deployment) -->
     <script>
       window.csrfToken = '';
       window.userId = '';
       window.tenantId = '';
-      window.appId = '';
+      window.appId = 'app_4k4csgks1wg9v';
       window.ENVIRONMENT = 'production';
-      window._appInfo = { name: '篝火心動夜', description: '文旅恋综提案' };
+      window._appInfo = {
+        name: '篝火心動夜',
+        avatar: '',
+        description: '文旅恋综 · 把"观察室"搬进风景里'
+      };
     </script>
-    <link rel="stylesheet" href="/assets/index-BV5enpyC.css" />
+
+    <!-- Preload critical modules -->
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-BYbx6iT9.js">
+    <link rel="modulepreload" crossorigin href="/assets/radix-ChQ4fgVN.js">
+    <link rel="modulepreload" crossorigin href="/assets/toolkit-e2nKO-Ai.js">
+
+    <!-- App styles -->
+    <link rel="stylesheet" crossorigin href="/assets/index-BV5enpyC.css">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="https://lf3-static.bytednsdoc.com/obj/eden-cn/ylcylz_fsph_ryhs/ljhwZthlaukjlkulzlp/feisuda/feisuda.svg" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/assets/index-BJvbs260.js"></script>
+    <script type="module" crossorigin src="/assets/index-BJvbs260.js"></script>
   </body>
 </html>
