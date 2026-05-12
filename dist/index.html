@@ -8,28 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --bg-dark: #0c0906;
-            --bg-overlay: rgba(12, 9, 6, 0.75);
+            --bg-dark: #0a0812;
             --accent: #ff6b35;
             --accent-light: #ff8c5a;
+            --accent-pink: #e8b4b8;
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-secondary: rgba(255, 255, 255, 0.75);
             --text-muted: rgba(255, 255, 255, 0.5);
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.12);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-dark);
@@ -38,17 +32,14 @@
             height: 100vh;
         }
 
-        .serif {
-            font-family: 'Noto Serif SC', serif;
-        }
+        .serif { font-family: 'Noto Serif SC', serif; }
 
         /* Progress Bar */
         .progress-bar {
             position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            top: 0; left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-pink));
             z-index: 1000;
             transition: width 0.3s ease;
         }
@@ -56,35 +47,24 @@
         /* Navigation Dots */
         .nav-dots {
             position: fixed;
-            right: 30px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 999;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
-
         .nav-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--text-muted);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
-
-        .nav-dot:hover {
-            background: var(--accent-light);
-            transform: scale(1.2);
-        }
-
-        .nav-dot.active {
-            background: var(--accent);
-            transform: scale(1.3);
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
-        }
+        .nav-dot:hover { background: var(--accent-light); transform: scale(1.2); }
+        .nav-dot.active { background: var(--accent); transform: scale(1.3); box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); }
 
         /* Main Container */
         .slides-container {
@@ -93,10 +73,7 @@
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
-
-        .slides-container::-webkit-scrollbar {
-            display: none;
-        }
+        .slides-container::-webkit-scrollbar { display: none; }
 
         /* Section Base */
         .section {
@@ -104,16 +81,15 @@
             width: 100%;
             scroll-snap-align: start;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .section-bg {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             background-size: cover;
@@ -123,644 +99,503 @@
 
         .section-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(180deg, 
-                rgba(12, 9, 6, 0.4) 0%, 
-                rgba(12, 9, 6, 0.7) 50%, 
-                rgba(12, 9, 6, 0.9) 100%);
+                rgba(10, 8, 18, 0.5) 0%, 
+                rgba(10, 8, 18, 0.75) 50%, 
+                rgba(10, 8, 18, 0.9) 100%);
             z-index: 1;
         }
 
         .section-content {
             position: relative;
             z-index: 2;
-            width: 90%;
-            max-width: 1200px;
-            padding: 40px 20px;
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
         }
+
+        /* Decorative Icon */
+        .deco-icon {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            opacity: 0.4;
+            z-index: 3;
+        }
+        .deco-left { left: 30px; }
+        .deco-right { right: 30px; }
 
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
-            }
-        }
-
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
-
         @keyframes pulse {
-            0%, 100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
-
-        .animate-in {
-            animation: fadeInUp 0.8s ease forwards;
-        }
+        .animate-in { animation: fadeInUp 0.6s ease forwards; }
 
         /* Section 0: Cover */
         .cover-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1517176118179-6524673f9996?auto=format&fit=crop&w=1920&q=80');
+            background-image: url('https://images.unsplash.com/photo-1533577116850-9cc66cad8a9b?auto=format&fit=crop&w=1920&q=80');
         }
-
         .cover-content {
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
         }
-
         .cover-title {
-            font-size: clamp(3rem, 10vw, 7rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
-            letter-spacing: 0.15em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 60px rgba(255, 107, 53, 0.4);
-            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 50%, var(--accent-pink) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
         }
-
         .cover-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-size: clamp(0.75rem, 1.8vw, 1rem);
             color: var(--accent);
-            letter-spacing: 0.3em;
-            margin-bottom: 40px;
+            letter-spacing: 0.4em;
+            margin-bottom: 24px;
             text-transform: uppercase;
         }
-
         .cover-slogan {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.9rem, 1.6vw, 1.1rem);
             color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.8;
+            max-width: 480px;
+            line-height: 1.7;
             font-style: italic;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
-
+        .cover-tagline {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+        }
         .scroll-hint {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             letter-spacing: 0.1em;
             animation: float 2s ease-in-out infinite;
         }
 
-        .scroll-hint::after {
-            content: '↓';
-            font-size: 1.5rem;
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .section-tag {
+            font-size: 0.7rem;
             color: var(--accent);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 600;
+            letter-spacing: 0.08em;
         }
 
         /* Section 1: Core Idea */
         .idea-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');
+            background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1920&q=80');
         }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-tag {
-            font-size: 0.85rem;
-            color: var(--accent);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 600;
-            letter-spacing: 0.1em;
-        }
-
         .compare-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
-
         .compare-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 40px;
+            border-radius: 12px;
+            padding: 20px;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
         }
-
-        .compare-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .compare-card.negative {
-            opacity: 0.7;
-        }
-
-        .compare-card.positive {
-            border-color: rgba(255, 107, 53, 0.3);
-        }
-
+        .compare-card.negative { opacity: 0.65; }
+        .compare-card.positive { border-color: rgba(255, 107, 53, 0.3); }
         .compare-label {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            letter-spacing: 0.2em;
-            margin-bottom: 15px;
+            letter-spacing: 0.15em;
+            margin-bottom: 8px;
             text-transform: uppercase;
         }
-
         .compare-title {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
-
         .compare-list {
             list-style: none;
+            font-size: 0.85rem;
         }
-
         .compare-list li {
-            padding: 10px 0;
+            padding: 6px 0;
             color: var(--text-secondary);
+            padding-left: 18px;
             position: relative;
-            padding-left: 25px;
         }
-
         .compare-list li::before {
             content: '→';
             position: absolute;
             left: 0;
             color: var(--accent);
+            font-size: 0.8rem;
         }
-
         .section-quote {
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1rem;
             color: var(--accent);
             font-style: italic;
-            padding: 30px;
+            padding: 16px;
             border-top: 1px solid var(--card-border);
             border-bottom: 1px solid var(--card-border);
         }
 
         /* Section 2: Basic Info */
         .info-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80');
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
         }
-
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
         }
-
         .info-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 35px 25px;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
         }
-
-        .info-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-8px);
-        }
-
         .info-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-pink));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.5rem;
+            margin: 0 auto 12px;
+            font-size: 1.2rem;
         }
-
         .info-label {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
-
         .info-value {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Section 3: Core Gameplay */
         .gameplay-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=80');
+            background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1920&q=80');
         }
-
         .gameplay-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 16px;
+            margin-bottom: 16px;
         }
-
         .stage-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 12px;
+            padding: 20px 16px;
             text-align: center;
             backdrop-filter: blur(10px);
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
         }
-
-        .stage-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .stage-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stage-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
         .stage-number {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3rem;
-            font-weight: 700;
-            color: rgba(255, 107, 53, 0.15);
-        }
-
-        .stage-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-
-        .stage-activity {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .stage-vibe {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            padding: 8px 16px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        /* Section 4: Viral Moments */
-        .viral-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1920&q=80');
-        }
-
-        .viral-highlight {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .viral-title {
-            font-size: clamp(2rem, 5vw, 4rem);
-            color: var(--accent);
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-shadow: 0 0 40px rgba(255, 107, 53, 0.4);
-        }
-
-        .dialogue-box {
-            background: var(--card-bg);
-            border-left: 4px solid var(--accent);
-            border-radius: 0 16px 16px 0;
-            padding: 30px 35px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-        }
-
-        .dialogue-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-
-        .dialogue-response {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            padding-left: 30px;
-            border-left: 2px solid var(--card-border);
-        }
-
-        .spread-chain {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .chain-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 30px;
-            padding: 12px 25px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        .chain-arrow {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
-
-        .video-placeholder {
-            background: var(--card-bg);
-            border: 2px dashed var(--card-border);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-placeholder:hover {
-            border-color: var(--accent);
-            background: rgba(255, 107, 53, 0.05);
-        }
-
-        .video-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
+            top: 10px;
+            right: 12px;
             font-size: 2rem;
-            animation: pulse 2s ease-in-out infinite;
+            font-weight: 700;
+            color: rgba(255, 107, 53, 0.12);
         }
-
-        /* Section 5: Partnership */
-        .partner-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80');
-        }
-
-        .partner-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .partner-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 40px 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
-        .partner-card.featured::after {
-            content: '推荐';
-            position: absolute;
-            top: 15px;
-            right: -30px;
-            background: var(--accent);
-            color: white;
-            padding: 5px 40px;
-            font-size: 0.75rem;
-            transform: rotate(45deg);
-        }
-
-        .partner-level {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-
-        .partner-benefit {
+        .stage-name {
             font-size: 1.1rem;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .partner-brands {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .partner-brands strong {
-            color: var(--text-secondary);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        /* Section 6: Brand Scenarios */
-        .scenario-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80');
-        }
-
-        .scenario-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .scenario-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .scenario-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-        }
-
-        .scenario-img {
-            width: 100%;
-            height: 160px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .scenario-content {
-            padding: 25px;
-        }
-
-        .scenario-brand {
-            font-size: 0.8rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            font-weight: 600;
             margin-bottom: 10px;
+            color: var(--accent);
         }
-
-        .scenario-story {
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        .scenario-tag {
+        .stage-activity {
             font-size: 0.85rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .stage-vibe {
+            font-size: 0.75rem;
             color: var(--text-muted);
-            padding: 6px 14px;
+            padding: 5px 12px;
             background: rgba(255, 107, 53, 0.1);
             border-radius: 15px;
             display: inline-block;
         }
 
-        /* Section 7: Distribution */
-        .dist-section .section-bg {
-            background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1920&q=80');
+        /* Section 4: Viral Moments */
+        .viral-section .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1516113833495-96f7a3b4394b?auto=format&fit=crop&w=1920&q=80');
         }
-
-        .dist-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+        .viral-highlight {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .dist-card {
+        .viral-title {
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            color: var(--accent);
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+        }
+        .dialogue-box {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 35px;
+            border-left: 3px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin-bottom: 16px;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
         }
-
-        .dist-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
+        .dialogue-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 10px;
         }
-
-        .dist-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .dialogue-response {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding-left: 16px;
+            border-left: 2px solid var(--card-border);
         }
-
-        .dist-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 10px;
+        .spread-chain {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .chain-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 0.75rem;
+        }
+        .chain-arrow { color: var(--accent); font-size: 1rem; }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 16px;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .video-placeholder {
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .video-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.3rem;
+            animation: pulse 2s ease-in-out infinite;
         }
 
+        /* Section 5: Partnership */
+        .partner-section .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');
+        }
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .partner-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 16px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-card.featured::after {
+            content: '推荐';
+            position: absolute;
+            top: 10px;
+            right: -25px;
+            background: var(--accent);
+            color: white;
+            padding: 3px 25px;
+            font-size: 0.65rem;
+            transform: rotate(45deg);
+        }
+        .partner-level {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        .partner-benefit {
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .partner-brands {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .partner-brands strong {
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.7rem;
+        }
+
+        /* Section 6: Brand Scenarios */
+        .scenario-section .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1445308394109-4ec2920981b1?auto=format&fit=crop&w=1920&q=80');
+        }
+        .scenario-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .scenario-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            backdrop-filter: blur(10px);
+        }
+        .scenario-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+        .scenario-content { flex: 1; }
+        .scenario-brand {
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .scenario-story {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .scenario-tag {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 10px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* Section 7: Distribution */
+        .dist-section .section-bg {
+            background-image: url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1920&q=80');
+        }
+        .dist-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .dist-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 18px;
+            backdrop-filter: blur(10px);
+        }
+        .dist-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dist-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
         .dist-content {
             color: var(--text-secondary);
-            line-height: 1.7;
+            font-size: 0.8rem;
+            line-height: 1.5;
         }
-
         .hashtag {
             color: var(--accent);
             font-weight: 500;
@@ -770,144 +605,86 @@
         .ending-section .section-bg {
             background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1920&q=80');
         }
-
         .ending-content {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-
         .ending-quotes {
-            margin-bottom: 60px;
+            margin-bottom: 30px;
         }
-
         .ending-quote {
-            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
             font-weight: 500;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
-
-        .ending-quote:last-child {
-            color: var(--accent);
-        }
-
+        .ending-quote:last-child { color: var(--accent); }
         .qr-section {
             display: flex;
             justify-content: center;
-            gap: 60px;
-            margin-bottom: 50px;
+            gap: 40px;
+            margin-bottom: 30px;
         }
-
-        .qr-item {
-            text-align: center;
-        }
-
+        .qr-item { text-align: center; }
         .qr-placeholder {
-            width: 140px;
-            height: 140px;
+            width: 90px;
+            height: 90px;
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             color: #333;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
         }
-
         .qr-label {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
         }
-
         .company-info {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             letter-spacing: 0.1em;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .compare-grid,
-            .info-grid,
-            .gameplay-grid,
-            .partner-grid,
-            .scenario-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .nav-dots {
-                right: 15px;
-                gap: 8px;
-            }
-
-            .nav-dot {
-                width: 8px;
-                height: 8px;
-            }
-
-            .compare-grid,
-            .info-grid,
-            .gameplay-grid,
-            .partner-grid,
-            .scenario-grid,
-            .dist-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .stats-row {
+            .nav-dots { right: 12px; gap: 8px; }
+            .nav-dot { width: 6px; height: 6px; }
+            
+            .compare-grid { grid-template-columns: 1fr; gap: 12px; }
+            .info-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .gameplay-grid { grid-template-columns: 1fr; gap: 10px; }
+            .partner-grid { grid-template-columns: 1fr; gap: 10px; }
+            .dist-grid { grid-template-columns: 1fr; gap: 10px; }
+            
+            .stats-row { gap: 24px; }
+            .stat-number { font-size: 1.4rem; }
+            
+            .scenario-row {
                 flex-direction: column;
-                gap: 25px;
+                text-align: center;
+                padding: 12px;
             }
-
-            .spread-chain {
-                flex-direction: column;
-            }
-
-            .chain-arrow {
-                transform: rotate(90deg);
-            }
-
-            .qr-section {
-                flex-direction: column;
-                gap: 30px;
-                align-items: center;
-            }
-
-            .section-content {
-                padding: 20px 15px;
-            }
-
-            .compare-card,
-            .info-card,
-            .stage-card,
-            .partner-card,
-            .scenario-card,
-            .dist-card {
-                padding: 25px 20px;
-            }
-        }
-
-        /* Utility Classes */
-        .text-accent {
-            color: var(--accent);
-        }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            .scenario-img { width: 100%; height: 80px; }
+            .scenario-tag { margin-left: 0; margin-top: 8px; }
+            
+            .qr-section { gap: 24px; }
+            .qr-placeholder { width: 70px; height: 70px; }
+            
+            .deco-icon { font-size: 1.5rem; bottom: 20px; }
+            .deco-left { left: 20px; }
+            .deco-right { right: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
-
-    <!-- Navigation Dots -->
+    
     <div class="nav-dots" id="navDots">
         <div class="nav-dot active" data-index="0"></div>
         <div class="nav-dot" data-index="1"></div>
@@ -920,7 +697,6 @@
         <div class="nav-dot" data-index="8"></div>
     </div>
 
-    <!-- Main Container -->
     <div class="slides-container" id="slidesContainer">
         
         <!-- Section 0: Cover -->
@@ -929,18 +705,17 @@
             <div class="section-overlay"></div>
             <div class="section-content cover-content">
                 <h1 class="cover-title serif animate-in">篝火心動夜</h1>
-                <p class="cover-subtitle animate-in" style="animation-delay: 0.2s">BONFIRE HEARTS</p>
-                <p class="cover-slogan serif animate-in" style="animation-delay: 0.4s">
-                    不是在封闭空间里选择你，<br>
-                    而是在广阔天地间，慢慢走向你。
+                <p class="cover-subtitle animate-in" style="animation-delay: 0.15s">BONFIRE HEARTS</p>
+                <p class="cover-slogan serif animate-in" style="animation-delay: 0.3s">
+                    不是在封闭空间里选择你，而是在广阔天地间，慢慢走向你。
                 </p>
-                <p class="animate-in" style="animation-delay: 0.6s; color: var(--text-muted); font-size: 0.9rem;">
+                <p class="cover-tagline animate-in" style="animation-delay: 0.45s">
                     文旅恋综 · 把"观察室"搬进风景里
                 </p>
             </div>
-            <div class="scroll-hint">
-                <span>向下滚动探索</span>
-            </div>
+            <div class="scroll-hint animate-in" style="animation-delay: 0.6s">向下滑动</div>
+            <div class="deco-icon deco-left">🔥</div>
+            <div class="deco-icon deco-right">✨</div>
         </section>
 
         <!-- Section 1: Core Idea -->
@@ -959,8 +734,7 @@
                         <ul class="compare-list">
                             <li>封闭录制空间</li>
                             <li>明星观察团点评</li>
-                            <li>生硬的广告植入</li>
-                            <li>剧本感明显</li>
+                            <li>生硬广告植入</li>
                         </ul>
                     </div>
                     <div class="compare-card positive">
@@ -968,16 +742,15 @@
                         <h3 class="compare-title">自然沉浸模式</h3>
                         <ul class="compare-list">
                             <li>篝火旁 / 星空下</li>
-                            <li>嘉宾真情自然流露</li>
-                            <li>品牌无痕融入场景</li>
-                            <li>真实情感流动</li>
+                            <li>嘉宾真情流露</li>
+                            <li>品牌无痕融入</li>
                         </ul>
                     </div>
                 </div>
-                <p class="section-quote serif">
-                    "把'观察室'砸掉，让夜谈本身成为情感催化剂。"
-                </p>
+                <p class="section-quote serif">"把'观察室'砸掉，让夜谈成为情感催化剂。"</p>
             </div>
+            <div class="deco-icon deco-left">🌙</div>
+            <div class="deco-icon deco-right">🔥</div>
         </section>
 
         <!-- Section 2: Basic Info -->
@@ -992,26 +765,28 @@
                 <div class="info-grid">
                     <div class="info-card">
                         <div class="info-icon">👥</div>
-                        <p class="info-label">嘉宾阵容</p>
-                        <p class="info-value">4男4女<br>单身优质青年<br>25-35岁</p>
+                        <p class="info-label">嘉宾</p>
+                        <p class="info-value">4男4女<br/>25-35岁</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon">🗺️</div>
-                        <p class="info-label">旅行路线</p>
-                        <p class="info-value">海岛露营<br>古镇寻访<br>山野自驾</p>
+                        <p class="info-label">路线</p>
+                        <p class="info-value">海岛 / 古镇<br/>山野自驾</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon">📺</div>
-                        <p class="info-label">内容体量</p>
-                        <p class="info-value">8-10期<br>每集60-75分钟<br>精品制作</p>
+                        <p class="info-label">体量</p>
+                        <p class="info-value">8-10期<br/>60-75分钟</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon">💡</div>
-                        <p class="info-label">创作原则</p>
-                        <p class="info-value">旅行完整性第一<br>恋爱是自然的<br>副产品</p>
+                        <p class="info-label">原则</p>
+                        <p class="info-value">旅行完整<br/>恋爱自然</p>
                     </div>
                 </div>
             </div>
+            <div class="deco-icon deco-left">🏝️</div>
+            <div class="deco-icon deco-right">🚗</div>
         </section>
 
         <!-- Section 3: Core Gameplay -->
@@ -1021,33 +796,32 @@
             <div class="section-content">
                 <div class="section-header">
                     <p class="section-tag">Bonfire Night</p>
-                    <h2 class="section-title serif">核心玩法：篝火心動夜</h2>
-                    <p style="color: var(--text-secondary); margin-top: 15px;">每晚篝火旁45-60分钟，三阶段递进</p>
+                    <h2 class="section-title serif">篝火心動夜</h2>
                 </div>
                 <div class="gameplay-grid">
                     <div class="stage-card">
                         <span class="stage-number">01</span>
                         <h3 class="stage-name">破冰</h3>
-                        <p class="stage-activity">今日关键词 →<br>最难忘画面</p>
+                        <p class="stage-activity">今日关键词<br/>最难忘画面</p>
                         <span class="stage-vibe">轻松欢笑</span>
                     </div>
                     <div class="stage-card">
                         <span class="stage-number">02</span>
                         <h3 class="stage-name">试探</h3>
-                        <p class="stage-activity">匿名漂流瓶 →<br>"我今天注意到…"</p>
+                        <p class="stage-activity">匿名漂流瓶<br/>"我今天注意到…"</p>
                         <span class="stage-vibe">好奇微醺</span>
                     </div>
                     <div class="stage-card">
                         <span class="stage-number">03</span>
                         <h3 class="stage-name">走心</h3>
-                        <p class="stage-activity">星空真心话 →<br>心动晚风告白</p>
+                        <p class="stage-activity">星空真心话<br/>心动晚风告白</p>
                         <span class="stage-vibe">深情静谧</span>
                     </div>
                 </div>
-                <p class="section-quote serif">
-                    "火光渐暗，心意渐明"
-                </p>
+                <p class="section-quote serif">"火光渐暗，心意渐明"</p>
             </div>
+            <div class="deco-icon deco-left">⭐</div>
+            <div class="deco-icon deco-right">💫</div>
         </section>
 
         <!-- Section 4: Viral Moments -->
@@ -1060,41 +834,28 @@
                     <h2 class="viral-title serif">"我今天注意到……"</h2>
                 </div>
                 <div class="dialogue-box">
-                    <p class="dialogue-text serif">
-                        "我今天注意到，D在礁石滩弯腰捡了一路塑料瓶，没有人在意，但我看到了。"
-                    </p>
-                    <p class="dialogue-response serif">
-                        "……谢谢，我没想到有人会注意到这个。"
-                    </p>
+                    <p class="dialogue-text serif">"我今天注意到，D在礁石滩弯腰捡了一路塑料瓶，没有人在意，但我看到了。"</p>
+                    <p class="dialogue-response serif">"……谢谢，我没想到有人会注意到这个。"</p>
                 </div>
                 <div class="spread-chain">
                     <span class="chain-item">隐秘关心被公开</span>
                     <span class="chain-arrow">→</span>
                     <span class="chain-item">心跳加速</span>
                     <span class="chain-arrow">→</span>
-                    <span class="chain-item">全场起哄</span>
-                    <span class="chain-arrow">→</span>
                     <span class="chain-item">病毒传播</span>
                 </div>
                 <div class="stats-row">
-                    <div class="stat-item">
-                        <p class="stat-number">500万+</p>
-                        <p class="stat-label">单条播放</p>
-                    </div>
-                    <div class="stat-item">
-                        <p class="stat-number">30+</p>
-                        <p class="stat-label">名场面</p>
-                    </div>
-                    <div class="stat-item">
-                        <p class="stat-number">Top3</p>
-                        <p class="stat-label">话题榜</p>
-                    </div>
+                    <div class="stat-item"><p class="stat-number">500万+</p><p class="stat-label">单条播放</p></div>
+                    <div class="stat-item"><p class="stat-number">30+</p><p class="stat-label">名场面</p></div>
+                    <div class="stat-item"><p class="stat-number">Top3</p><p class="stat-label">话题榜</p></div>
                 </div>
-                <div class="video-placeholder">
+                <div class="video-placeholder" onclick="alert('视频片段即将上线')">
                     <div class="video-icon">▶</div>
-                    <p>点击观看 · 真实反应片段</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary)">点击观看真实反应片段</p>
                 </div>
             </div>
+            <div class="deco-icon deco-left">🌊</div>
+            <div class="deco-icon deco-right">💕</div>
         </section>
 
         <!-- Section 5: Partnership -->
@@ -1110,32 +871,23 @@
                     <div class="partner-card">
                         <h3 class="partner-level">场景级</h3>
                         <p class="partner-benefit">产品自然植入</p>
-                        <p class="partner-brands">
-                            <strong>适合品牌</strong>
-                            户外 / 汽车 / 3C / 饮品
-                        </p>
+                        <p class="partner-brands"><strong>适合品牌</strong>户外 / 汽车 / 3C / 饮品</p>
                     </div>
                     <div class="partner-card featured">
                         <h3 class="partner-level">情绪级</h3>
                         <p class="partner-benefit">品牌故事官加入夜谈</p>
-                        <p class="partner-brands">
-                            <strong>适合品牌</strong>
-                            有态度、重情感的品牌
-                        </p>
+                        <p class="partner-brands"><strong>适合品牌</strong>有态度、重情感的品牌</p>
                     </div>
                     <div class="partner-card">
                         <h3 class="partner-level">IP级</h3>
                         <p class="partner-benefit">整季冠名 + 路线定制</p>
-                        <p class="partner-brands">
-                            <strong>适合品牌</strong>
-                            头部品牌深度合作
-                        </p>
+                        <p class="partner-brands"><strong>适合品牌</strong>头部品牌深度合作</p>
                     </div>
                 </div>
-                <p class="section-quote">
-                    从场景渗透到情感共鸣
-                </p>
+                <p class="section-quote">从场景渗透到情感共鸣</p>
             </div>
+            <div class="deco-icon deco-left">🤝</div>
+            <div class="deco-icon deco-right">💎</div>
         </section>
 
         <!-- Section 6: Brand Scenarios -->
@@ -1148,32 +900,34 @@
                     <h2 class="section-title serif">品牌场景示例</h2>
                 </div>
                 <div class="scenario-grid">
-                    <div class="scenario-card">
-                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="scenario-row">
+                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=400&q=80')"></div>
                         <div class="scenario-content">
                             <p class="scenario-brand">汽车品牌</p>
-                            <p class="scenario-story">自驾公路 → 车窗全开 → "那一刻比任何音乐都好听"</p>
-                            <span class="scenario-tag">自由感共鸣</span>
+                            <p class="scenario-story">自驾公路，车窗全开，"那一刻比任何音乐都好听"</p>
                         </div>
+                        <span class="scenario-tag">自由感</span>
                     </div>
-                    <div class="scenario-card">
-                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="scenario-row">
+                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=400&q=80')"></div>
                         <div class="scenario-content">
                             <p class="scenario-brand">户外品牌</p>
-                            <p class="scenario-story">搭帐篷登顶 → 冲锋衣风雨验证 → 产品在真实环境被验证</p>
-                            <span class="scenario-tag">真实场景验证</span>
+                            <p class="scenario-story">搭帐篷登顶，冲锋衣在风雨中被真实验证</p>
                         </div>
+                        <span class="scenario-tag">真实场景</span>
                     </div>
-                    <div class="scenario-card">
-                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="scenario-row">
+                        <div class="scenario-img" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&q=80')"></div>
                         <div class="scenario-content">
                             <p class="scenario-brand">咖啡品牌</p>
-                            <p class="scenario-story">山顶 → 冰咖啡 → 篝火旁热饮 → 温暖感绑定</p>
-                            <span class="scenario-tag">温度感传递</span>
+                            <p class="scenario-story">山顶冰咖啡，篝火旁热饮，温暖感绑定</p>
                         </div>
+                        <span class="scenario-tag">温度感</span>
                     </div>
                 </div>
             </div>
+            <div class="deco-icon deco-left">🚙</div>
+            <div class="deco-icon deco-right">☕</div>
         </section>
 
         <!-- Section 7: Distribution -->
@@ -1187,45 +941,25 @@
                 </div>
                 <div class="dist-grid">
                     <div class="dist-card">
-                        <div class="dist-title">
-                            <span class="dist-icon">📺</span>
-                            正片内容
-                        </div>
-                        <p class="dist-content">
-                            长视频平台深度播出，完整呈现旅途故事与情感发展，适合品牌深度内容合作
-                        </p>
+                        <div class="dist-title"><span class="dist-icon">📺</span>正片内容</div>
+                        <p class="dist-content">长视频平台深度播出，完整呈现旅途故事与情感发展</p>
                     </div>
                     <div class="dist-card">
-                        <div class="dist-title">
-                            <span class="dist-icon">📱</span>
-                            短视频切片
-                        </div>
-                        <p class="dist-content">
-                            抖音/小红书"我今天注意到"名场面病毒传播，精准触达年轻用户群体
-                        </p>
+                        <div class="dist-title"><span class="dist-icon">📱</span>短视频切片</div>
+                        <p class="dist-content">抖音/小红书名场面病毒传播，精准触达年轻用户</p>
                     </div>
                     <div class="dist-card">
-                        <div class="dist-title">
-                            <span class="dist-icon">💬</span>
-                            话题运营
-                        </div>
-                        <p class="dist-content">
-                            <span class="hashtag">#篝火真心话</span> 
-                            <span class="hashtag">#旅途中谁在偷偷看你</span> 
-                            <span class="hashtag">#慢慢走向你</span>
-                        </p>
+                        <div class="dist-title"><span class="dist-icon">💬</span>话题运营</div>
+                        <p class="dist-content"><span class="hashtag">#篝火真心话</span> <span class="hashtag">#慢慢走向你</span></p>
                     </div>
                     <div class="dist-card">
-                        <div class="dist-title">
-                            <span class="dist-icon">📊</span>
-                            长尾价值
-                        </div>
-                        <p class="dist-content">
-                            一季沉淀30+短视频切片+大量图文素材，持续为品牌带来曝光与话题热度
-                        </p>
+                        <div class="dist-title"><span class="dist-icon">📊</span>长尾价值</div>
+                        <p class="dist-content">一季沉淀30+短视频切片，持续品牌曝光</p>
                     </div>
                 </div>
             </div>
+            <div class="deco-icon deco-left">📲</div>
+            <div class="deco-icon deco-right">📈</div>
         </section>
 
         <!-- Section 8: Ending -->
@@ -1234,88 +968,51 @@
             <div class="section-overlay"></div>
             <div class="section-content ending-content">
                 <div class="ending-quotes">
-                    <p class="ending-quote serif">
-                        "有些话，只有旅行的夜里才说得出口。"
-                    </p>
-                    <p class="ending-quote serif">
-                        "有些品牌，不用说话，风景已经替它表达了。"
-                    </p>
+                    <p class="ending-quote serif">"有些话，只有旅行的夜里才说得出口。"</p>
+                    <p class="ending-quote serif">"有些品牌，不用说话，风景已经替它表达了。"</p>
                 </div>
                 <div class="qr-section">
                     <div class="qr-item">
-                        <div class="qr-placeholder">
-                            <span>商务合作<br>二维码</span>
-                        </div>
+                        <div class="qr-placeholder">商务<br>合作</div>
                         <p class="qr-label">商务合作</p>
                     </div>
                     <div class="qr-item">
-                        <div class="qr-placeholder">
-                            <span>选角导演<br>二维码</span>
-                        </div>
+                        <div class="qr-placeholder">选角<br>导演</div>
                         <p class="qr-label">选角导演</p>
                     </div>
                 </div>
-                <p class="company-info">
-                    制作方：上海整挺好文化传媒有限公司
-                </p>
+                <p class="company-info">制作方：上海整挺好文化传媒有限公司</p>
             </div>
+            <div class="deco-icon deco-left">🔥</div>
+            <div class="deco-icon deco-right">🌌</div>
         </section>
 
     </div>
 
     <script>
-        // DOM Elements
         const container = document.getElementById('slidesContainer');
         const sections = document.querySelectorAll('.section');
         const dots = document.querySelectorAll('.nav-dot');
         const progressBar = document.getElementById('progressBar');
-
         let currentIndex = 0;
-        let isScrolling = false;
-        let scrollTimeout;
 
-        // Update active state
         function updateActiveState(index) {
             currentIndex = index;
-            
-            // Update dots
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-
-            // Update progress bar
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             const progress = ((index + 1) / sections.length) * 100;
             progressBar.style.width = `${progress}%`;
-
-            // Trigger animations
-            const activeSection = sections[index];
-            const animatedElements = activeSection.querySelectorAll('.animate-in');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.offsetHeight; // Trigger reflow
-                el.style.animation = null;
-            });
         }
 
-        // Scroll to section
         function scrollToSection(index) {
             if (index < 0 || index >= sections.length) return;
-            
-            isScrolling = true;
             sections[index].scrollIntoView({ behavior: 'smooth' });
             updateActiveState(index);
-            
-            setTimeout(() => {
-                isScrolling = false;
-            }, 800);
         }
 
-        // Click on dots
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => scrollToSection(index));
         });
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
@@ -1332,72 +1029,31 @@
             }
         });
 
-        // Scroll detection with IntersectionObserver
-        const observerOptions = {
-            root: container,
-            threshold: 0.5
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const index = parseInt(entry.target.dataset.index);
-                    updateActiveState(index);
+                    updateActiveState(parseInt(entry.target.dataset.index));
                 }
             });
-        }, observerOptions);
+        }, { root: container, threshold: 0.5 });
 
         sections.forEach(section => observer.observe(section));
 
-        // Wheel event for smooth scrolling
         let wheelTimeout;
         document.addEventListener('wheel', (e) => {
             if (wheelTimeout) return;
-            
-            wheelTimeout = setTimeout(() => {
-                wheelTimeout = null;
-            }, 800);
-
-            if (e.deltaY > 0) {
-                scrollToSection(currentIndex + 1);
-            } else {
-                scrollToSection(currentIndex - 1);
-            }
+            wheelTimeout = setTimeout(() => wheelTimeout = null, 800);
+            scrollToSection(e.deltaY > 0 ? currentIndex + 1 : currentIndex - 1);
         }, { passive: true });
 
-        // Touch/swipe support
         let touchStartY = 0;
-        let touchEndY = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartY = e.changedTouches[0].screenY;
-        }, { passive: true });
-
+        document.addEventListener('touchstart', (e) => touchStartY = e.changedTouches[0].screenY, { passive: true });
         document.addEventListener('touchend', (e) => {
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
+            const diff = touchStartY - e.changedTouches[0].screenY;
+            if (Math.abs(diff) > 50) scrollToSection(diff > 0 ? currentIndex + 1 : currentIndex - 1);
         }, { passive: true });
 
-        function handleSwipe() {
-            const threshold = 50;
-            const diff = touchStartY - touchEndY;
-
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    scrollToSection(currentIndex + 1);
-                } else {
-                    scrollToSection(currentIndex - 1);
-                }
-            }
-        }
-
-        // Initialize
         updateActiveState(0);
-
-        // Video placeholder click
-        document.querySelector('.video-placeholder')?.addEventListener('click', () => {
-            alert('视频片段即将上线，敬请期待');
-        });
     </script>
 </body>
 </html>
